@@ -1,0 +1,240 @@
+<main id="main-doc">
+    <div id="navigationPanel">
+        <nav id="navbar">
+            <header><h3 id="springHeader">Spring topics</h3></header>
+            <a href="#About_the_author"
+               class="nav-link">About the author</a>
+            <a href="#Spring_documentation"
+               class="nav-link">Spring documentation</a>
+            <a href="#First_Spring_application"
+               class="nav-link">First Spring application</a>
+            <a href="#Spring_MVC"
+               class="nav-link">Spring MVC</a>
+            <a href="#Spring_Data"
+               class="nav-link">Spring Data</a>
+            <a href="#Spring_Template_Project"
+               class="nav-link">Create Spring project from a template</a>
+            <a href="#Spring_REST"
+               class="nav-link">Spring REST</a>
+            <a href="#CommandLineRunner"
+               class="nav-link">CommandLineRunner</a>
+            <a href="#Configure_a_DataSource"
+               class="nav-link">Configure a DataSource</a>
+        </nav>
+    </div>
+    <section class="main-section"
+             id="About_the_author">
+        <header>
+            <h2>About the author</h2>
+        </header>
+        <article>
+            <p>
+                My name is Tatyana. I was working with Spring framework several years and then had a long vacation
+                because of maternity leave. Now my dougther is big so i decided to come back to programming. I've
+                decided to created this page to have a quick start for Spring. Hope this will be helpful for me or
+                someone else.
+            </p>
+        </article>
+    </section>
+    <section class="main-section"
+             id="Spring_documentation">
+        <header>
+            <h2>Spring documentation</h2>
+        </header>
+
+        <article>
+            <p>I am using the following documents while creating the page:</p>
+
+            <ul>
+                <li>
+                    <a target="_blank" href="https://spring-projects.ru/guides/">Spring Guides</a>.
+                </li>
+                <li><a target="_blank"
+                       href="https://docs.spring.io/spring-boot/docs/1.1.8.RELEASE/reference/htmlsingle/">Spring Boot
+                    Reference Guide</a></li>
+                <li>Spring Recipes, 3rd Edition</li>
+                <li>
+                    Юлиана К., Роб Х., Крис Ш., Кларенс Хо - Spring 5 для профессионалов - 2019
+                </li>
+                <li>Deinum M., Rubio D., Long J. - Spring 5 Recipes, 4th Edition - 2017
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section class="main-section"
+             id="First_Spring_application">
+        <header>
+            <h2>First Spring application</h2>
+        </header>
+
+        <article>
+            <p>
+                <a target="_blank"
+                   href="https://docs.spring.io/spring-boot/docs/1.1.8.RELEASE/reference/htmlsingle/#boot-documentation-first-steps">Use
+                    the following link with an example.</a>
+            <ol>
+                <li>Create new project in your Intelij Idea with a type "Maven".</li>
+                <li>Update your pom.xml with the following code:
+                    <pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;4.1.5.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+                    This will include spring-context to your project.
+                    <pre><code>&lt;build&gt;
+    &lt;pluginManagement&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId>org.apache.maven.plugins&lt;/groupId&gt;
+                    &lt;artifactId>maven-compiler-plugin&lt;/artifactId&gt;
+                    &lt;configuration&gt;
+                        &lt;source>1.8&lt;/source&gt;
+                        &lt;target>1.8&lt;/target&gt;
+                    &lt;/configuration&gt;
+            &lt;/plugin&gt;
+         &lt;/plugins&gt;
+    &lt;/pluginManagement&gt;
+&lt;/build&gt;</code></pre>
+                    This will specify java version for maven plugin. By default 1.6 is used, we updated it to 1.8.
+                </li>
+                <li>Create entry point for the application and declare Spring context here:
+                    <pre><code>import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class Application {
+    public static void main(String args[]) {
+        ApplicationContext context =
+                new GenericXmlApplicationContext("beans.xml");
+        System.out.println(("Hello"));
+    }
+}</code></pre>
+                </li>
+                <li>Add "beans.xml" file under your "resources" folder:
+                    <pre><code> &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+ &lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
+
+ &lt;/beans&gt;</code></pre>
+                </li>
+
+            </ol>
+            Now run the application and you will see "Hello" world in your console. Lets proceed with more complex
+            application!
+            </p>
+        </article>
+    </section>
+    <section class="main-section"
+             id="Spring_MVC">
+        <header>
+            <h2>Spring MVC</h2>
+        </header>
+
+        <article>
+            <p>The central component of Spring MVC is a front controller. To define a controller class in Spring, a
+                class has to be marked with the @Controller or @RestController
+                annotation. When an @Controller annotated class (i.e., a controller class) receives a request, it looks
+                for an
+                appropriate handler method to handle the request. To do so, a controller class’s methods are decorated
+                with the @RequestMapping annotation, making them handler methods.</p>
+            <p>After a handler method has finished processing the request, it delegates control to a view, which is
+                represented as the handler method’s return value. To provide a flexible approach, a handler method’s
+                return
+                value doesn’t represent a view’s implementation (e.g., user.jsp or report.pdf) but rather a logical view
+                (e.g., user or report)—note the lack of file extension.</p>
+            <p>When the controller class receives a view, it resolves the logical view name into a specific view
+                implementation (e.g., user.jsp or report.pdf) by means of a view resolver. A view resolver is a bean
+                configured in the web application context that implements the ViewResolver interface. Its responsibility
+                is
+                to return a specific view implementation (HTML, JSP, PDF, or other) for a logical view name.</p>
+        </article>
+        <header>
+            <h3>Spring MVC configuration</h3>
+        </header>
+        <article><p>To enable Spring MVC in your project you should
+            <ol>
+                <li>add spring-webmvc dependency into pom file:
+                    <pre><code>&lt;dependency&gt;
+&lt;groupId>org.springframework&lt;/groupId&gt;
+&lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+&lt;version&gt;${spring.version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+                </li>
+                <li>Declare DispatcherServlet</li>
+                <li>Declare InternalResourceViewResolver bean, which qill resolve view name into a .jsp file inside
+                    /WEB-INF/jsp/ directory
+                </li>
+
+                <mark>Previous steps will be missed if you use spring-boot-starter-web which contains all needed for
+                    web programming <a href="https://spring-projects.ru/guides/rest-service/">Создание RESTful
+                        Web-сервиса</a>. In that starter module DispatcherServlet and web.xml are already
+                    configured.
+                </mark>
+                <li>Declare @Controller class which will handle GET and POST methods. Methods should be annotated
+                    with @RequestMapping(method = RequestMethod.GET).
+                </li>
+            </ol>
+            See code of the simpliest MVC project here <a href="https://github.com/tsharon-byte/SpringMvcExample">SpringMvcExample</a>
+        </article>
+    </section>
+    <section class="main-section"
+             id="Spring_Data">
+        <header>
+            <h2>Spring Data</h2>
+        </header>
+
+        <article>
+            <p>Lets add Data handling into our Spring MVC example. I've created an application with FROM, where the user
+                can enter person information, this will be stored in DB and the list of persons will be shouwn to a
+                user. View part is written using <a
+                        href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#creating-a-form">Thymeleaf</a>.
+            </p>See code of my Spring Data project here <a href="https://github.com/tsharon-byte/SpringDataExample">SpringDataExample</a>.
+        </article>
+    </section>
+    <section class="main-section"
+             id="Spring_Template_Project">
+        <header>
+            <h2>Create Spring project from a template</h2>
+        </header>
+
+        <article>
+            <p>You can create Spring project from a template using <a href="https://start.spring.io/">Spring
+                Initializr</a> or with <a
+                    href="https://www.youtube.com/watch?time_continue=814&v=p8AdyMlpmPk&feature=emb_logo">STS tool</a>.
+            </p>
+        </article>
+    </section>
+    <section class="main-section"
+             id="Spring_REST">
+        <header>
+            <h2>Spring REST</h2>
+        </header>
+        <article><p>The @RestController annotation in Spring MVC is nothing but a combination of @Controller and
+            @ResponseBody annotation.</p>
+        </article>
+    </section>
+    <section class="main-section"
+             id="CommandLineRunner">
+        <header>
+            <h2>CommandLineRunner</h2>
+        </header>
+        <article><p>CommandLineRunner interface halps to executr some code right after the application starts.</p>
+        </article>
+    </section>
+    <section class="main-section"
+             id="Configure_a_DataSource">
+        <header>
+            <h2>Configure a DataSource</h2>
+        </header>
+        <article>
+        <a href='https://docs.spring.io/spring-boot/docs/1.1.8.RELEASE/reference/htmlsingle/#boot-features-configure-datasource'>Link
+            to documentation</a>
+        </article>
+    </section>
+    <footer>
+        <hr/>
+        Created by Tatyana</a>
+    </footer>
+</main>
