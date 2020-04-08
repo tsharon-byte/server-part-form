@@ -59,9 +59,9 @@
         </div>
         <div class="form-group">
             <label id="select-label"
-                   th:for="${#ids.next('currentRole')}">Which option best describes your current role?</label>
-            <select th:field="*{currentRole}" required>
-                <option th:each="role : ${currentRoles}"
+                   th:for="${#ids.next('currentUserRole')}">Which option best describes your current role?</label>
+            <select th:field="*{currentUserRole}" required>
+                <option th:each="role : ${currentUserRoles}"
                         th:value="${role}"
                         th:text="${role}">Select your current role
                 </option>
