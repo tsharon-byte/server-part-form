@@ -1,20 +1,17 @@
 package hello;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String firstName;
     private String lastName;
     private String email;
     private int age;
-    private String currentRole;
+    private String currentUserRole;
     private String recommend;
     private String language;
     private String comments;
@@ -22,23 +19,15 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String email, int age, String currentRole, String recommend, String language, String comments) {
+    public Person(String firstName, String lastName, String email, int age, String currentUserRole, String recommend, String language, String comments) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
-        this.currentRole = currentRole;
+        this.currentUserRole = currentUserRole;
         this.recommend = recommend;
         this.language = language;
         this.comments = comments;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -73,12 +62,12 @@ public class Person {
         this.age = age;
     }
 
-    public String getCurrentRole() {
-        return currentRole;
+    public String getCurrentUserRole() {
+        return currentUserRole;
     }
 
-    public void setCurrentRole(String currentRole) {
-        this.currentRole = currentRole;
+    public void setCurrentUserRole(String currentUserRole) {
+        this.currentUserRole = currentUserRole;
     }
 
     public String getRecommend() {
@@ -108,11 +97,12 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
-                ", currentRole='" + currentRole + '\'' +
+                ", currentUserRole='" + currentUserRole + '\'' +
                 ", recommend='" + recommend + '\'' +
                 ", language='" + language + '\'' +
                 ", comments='" + comments + '\'' +
