@@ -14,13 +14,18 @@ public class PersonService {
         this.repository = repository;
     }
 
-    public void save(Person person){
+    public void save(Person person) {
         repository.save(person);
     }
-    public List<Person> findByLastName(String lastName){
-        return repository.findByLastName(lastName);
+
+    public List<Person> findByFirstNameAndLastName(String firstName, String lastName) {
+        return repository.findByFirstNameAndLastName(firstName, lastName);
     }
-    public List<Person> findAll(){
+
+    public List<Person> findAll() {
         return (List<Person>) repository.findAll();
+    }
+    public void deleteEmployee(Long id){
+        repository.deleteById(id);
     }
 }

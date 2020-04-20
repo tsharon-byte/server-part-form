@@ -30,15 +30,28 @@ public class PersonController {
     @ResponseBody
     @CrossOrigin
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
-    public ResponseEntity  employee(@RequestBody Person person) {
+    public ResponseEntity employee(@RequestBody Person person) {
+        List<Person> list = personService.findByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+        if (!list.isEmpty()) {
+            person.setId(list.get(0).getId());
+        }
+
         personService.save(person);
         return ResponseEntity.ok().build();
     }
 
     @ResponseBody
     @CrossOrigin
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteEmployee(@PathVariable Long id) {
+        personService.deleteEmployee(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @ResponseBody
+    @CrossOrigin
     @RequestMapping(value = "/employeeList", method = RequestMethod.GET)
-    public List<Person>  employeeList() {
+    public List<Person> employeeList() {
         List<Person> personsList;
         personsList = personService.findAll();
         return personsList;
@@ -52,11 +65,11 @@ public class PersonController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String form(Model model) {
-        String[] currentRoles= {"Student", "Full time job"};
-        String[] recommendTypes= {"Yes", "No", "Maybe"};
-        String[] languageTypes={"Java","Java script", "C++"};
-        model.addAttribute("currentRoles",currentRoles);
-        model.addAttribute("person",new Person());
+        String[] currentRoles = {"Student", "Full time job"};
+        String[] recommendTypes = {"Yes", "No", "Maybe"};
+        String[] languageTypes = {"Java", "Java script", "C++"};
+        model.addAttribute("currentRoles", currentRoles);
+        model.addAttribute("person", new Person());
         model.addAttribute("recommendTypes", recommendTypes);
         model.addAttribute("languageTypes", languageTypes);
         return "form";
