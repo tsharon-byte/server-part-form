@@ -3,13 +3,14 @@ package hello;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @Entity
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
