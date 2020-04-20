@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class PersonController {
@@ -45,6 +46,17 @@ public class PersonController {
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable Long id) {
         personService.deleteEmployee(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @ResponseBody
+    @CrossOrigin
+    @RequestMapping(value = "/employee/", method = RequestMethod.DELETE)
+    public ResponseEntity deleteEmployee(@RequestParam String firstName, @RequestParam String lastName) {
+        int result = personService.deleteEmployee(firstName, lastName);
+        if(result == 0){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().build();
     }
 

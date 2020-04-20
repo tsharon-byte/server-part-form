@@ -25,7 +25,15 @@ public class PersonService {
     public List<Person> findAll() {
         return (List<Person>) repository.findAll();
     }
-    public void deleteEmployee(Long id){
+
+    public void deleteEmployee(Long id) {
         repository.deleteById(id);
+    }
+
+    public int deleteEmployee(String firstName, String lastName) {
+        List<Person> list = repository.findByFirstNameAndLastName(firstName, lastName);
+        int result = list.size();
+        list.forEach(item -> repository.delete(item));
+        return result;
     }
 }
