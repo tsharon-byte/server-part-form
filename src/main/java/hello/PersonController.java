@@ -34,10 +34,18 @@ public class PersonController {
     public ResponseEntity employee(@RequestBody Person person) {
         List<Person> list = personService.findByFirstNameAndLastName(person.getFirstName(), person.getLastName());
         if (!list.isEmpty()) {
-            person.setId(list.get(0).getId());
+            Person personFromDb = list.get(0);
+            personFromDb.setAge(person.getAge());
+            personFromDb.setComments(person.getComments());
+            personFromDb.setCurrentUserRole(person.getCurrentUserRole());
+            personFromDb.setEmail(person.getEmail());
+            personFromDb.setLanguage(person.getLanguage());
+            personFromDb.setRecommend(person.getRecommend());
+            personService.save(personFromDb);
         }
-
-        personService.save(person);
+        else{
+            personService.save(person);
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -50,7 +58,7 @@ public class PersonController {
     }
 
     @ResponseBody
-    @CrossOrigin
+    @CrossOrigin(methods = RequestMethod.DELETE)
     @RequestMapping(value = "/employee", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@RequestBody Person person) {
         int result = personService.deleteEmployee(person.getFirstName(), person.getLastName());
