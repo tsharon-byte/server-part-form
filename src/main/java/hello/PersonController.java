@@ -1,5 +1,7 @@
 package hello;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@CrossOrigin
 public class PersonController {
     PersonService personService;
+    private static final Logger logger
+            = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
     public PersonController(PersonService personService) {
@@ -29,9 +34,9 @@ public class PersonController {
     }
 
     @ResponseBody
-    @CrossOrigin
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
     public ResponseEntity employee(@RequestBody Person person) {
+        logger.info("POST..." + person.toString());
         List<Person> list = personService.findByFirstNameAndLastName(person.getFirstName(), person.getLastName());
         if (!list.isEmpty()) {
             Person personFromDb = list.get(0);
@@ -41,16 +46,15 @@ public class PersonController {
             personFromDb.setEmail(person.getEmail());
             personFromDb.setLanguage(person.getLanguage());
             personFromDb.setRecommend(person.getRecommend());
-            personService.save(personFromDb);
+            logger.info("updated to DB:" + personService.save(personFromDb));
         }
         else{
-            personService.save(person);
+            logger.info("saved to DB:" + personService.save(person));
         }
         return ResponseEntity.ok().build();
     }
 
     @ResponseBody
-    @CrossOrigin
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable Long id) {
         personService.deleteEmployee(id);
@@ -58,9 +62,9 @@ public class PersonController {
     }
 
     @ResponseBody
-    @CrossOrigin(methods = RequestMethod.DELETE)
     @RequestMapping(value = "/employee", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@RequestBody Person person) {
+        logger.info("DELETE..." + person.toString());
         int result = personService.deleteEmployee(person.getFirstName(), person.getLastName());
         if(result == 0){
             return ResponseEntity.notFound().build();
@@ -69,9 +73,9 @@ public class PersonController {
     }
 
     @ResponseBody
-    @CrossOrigin
     @RequestMapping(value = "/employeeList", method = RequestMethod.GET)
     public List<Person> employeeList() {
+        logger.info("GET all...");
         List<Person> personsList;
         personsList = personService.findAll();
         return personsList;

@@ -112,4 +112,19 @@ public class Person {
     public void setComments(String comments) {
         this.comments = comments;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", currentUserRole='" + currentUserRole + '\'' +
+                ", recommend='" + recommend + '\'' +
+                ", language='" + language + '\'' +
+                ", comments='" + comments + '\'' +
+                '}';
+    }
 }
