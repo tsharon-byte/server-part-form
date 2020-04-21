@@ -52,8 +52,8 @@ public class PersonController {
     @ResponseBody
     @CrossOrigin
     @RequestMapping(value = "/employee", method = RequestMethod.DELETE)
-    public ResponseEntity deleteEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        int result = personService.deleteEmployee(firstName, lastName);
+    public ResponseEntity deleteEmployee(@RequestBody Person person) {
+        int result = personService.deleteEmployee(person.getFirstName(), person.getLastName());
         if(result == 0){
             return ResponseEntity.notFound().build();
         }
