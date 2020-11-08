@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @CrossOrigin
@@ -44,7 +45,7 @@ public class EmployeeController {
 
     @ResponseBody
     @RequestMapping(value = "/training/employee/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity deleteEmployee(@PathVariable UUID id) {
         service.deleteEmployee(id);
         return ResponseEntity.ok().build();
     }
