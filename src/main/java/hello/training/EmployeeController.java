@@ -34,6 +34,7 @@ public class EmployeeController {
             employeeFromDb.setLanguage(employee.getLanguage());
             employeeFromDb.setSourceInformation(employee.getSourceInformation());
             employeeFromDb.setTimeForProgramming(employee.getTimeForProgramming());
+            employeeFromDb.setGender(employee.getGender());
             logger.info("updated to DB:" + service.save(employeeFromDb));
         }
         else{

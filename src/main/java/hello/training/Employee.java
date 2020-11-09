@@ -23,19 +23,9 @@ public class Employee {
 
     private String sourceInformation;
     private String timeForProgramming;
+    private String gender;
 
     public Employee() {
-    }
-
-    public Employee(UUID id, String firstName, String lastName, String email, int age, String language, String sourceInformation, String timeForProgramming) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-        this.language = language;
-        this.sourceInformation = sourceInformation;
-        this.timeForProgramming = timeForProgramming;
     }
 
     @Override
