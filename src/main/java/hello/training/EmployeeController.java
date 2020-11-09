@@ -30,11 +30,10 @@ public class EmployeeController {
         if (!list.isEmpty()) {
             Employee employeeFromDb = list.get(0);
             employeeFromDb.setAge(employee.getAge());
-            employeeFromDb.setComments(employee.getComments());
-            employeeFromDb.setCurrentUserRole(employee.getCurrentUserRole());
             employeeFromDb.setEmail(employee.getEmail());
             employeeFromDb.setLanguage(employee.getLanguage());
-            employeeFromDb.setRecommend(employee.getRecommend());
+            employeeFromDb.setSourceInformation(employee.getSourceInformation());
+            employeeFromDb.setTimeForProgramming(employee.getTimeForProgramming());
             logger.info("updated to DB:" + service.save(employeeFromDb));
         }
         else{

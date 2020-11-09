@@ -19,23 +19,23 @@ public class Employee {
     private String lastName;
     private String email;
     private int age;
-    private String currentUserRole;
-    private String recommend;
     private String language;
-    private String comments;
+
+    private String sourceInformation;
+    private String timeForProgramming;
 
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String email, int age, String currentUserRole, String recommend, String language, String comments) {
+    public Employee(UUID id, String firstName, String lastName, String email, int age, String language, String sourceInformation, String timeForProgramming) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
-        this.currentUserRole = currentUserRole;
-        this.recommend = recommend;
         this.language = language;
-        this.comments = comments;
+        this.sourceInformation = sourceInformation;
+        this.timeForProgramming = timeForProgramming;
     }
 
     @Override
@@ -50,20 +50,5 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", currentUserRole='" + currentUserRole + '\'' +
-                ", recommend='" + recommend + '\'' +
-                ", language='" + language + '\'' +
-                ", comments='" + comments + '\'' +
-                '}';
     }
 }
