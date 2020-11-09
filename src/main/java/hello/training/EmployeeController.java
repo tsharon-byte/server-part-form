@@ -51,17 +51,6 @@ public class EmployeeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/training/employee", method = RequestMethod.DELETE)
-    public ResponseEntity deleteEmployee(@RequestBody Employee employee) {
-        logger.info("DELETE..." + employee.toString());
-        int result = service.deleteEmployee(employee.getFirstName(), employee.getLastName());
-        if(result == 0){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().build();
-    }
-
-    @ResponseBody
     @RequestMapping(value = "/training/employeeList", method = RequestMethod.GET)
     public List<Employee> employeeList() {
         logger.info("GET all...");
