@@ -78,4 +78,17 @@ public class ManagerController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/training/employee", method = RequestMethod.DELETE)
+    public ResponseEntity deleteEmployee(@RequestParam UUID employee_id, @RequestParam UUID manager_id) {
+
+        Optional<Manager> manager = service.findById(manager_id);
+        if (manager.isPresent()) {
+            service.deleteEmployee(manager.get(), employee_id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

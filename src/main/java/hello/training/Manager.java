@@ -16,6 +16,6 @@ public class Manager {
     private String login;
     private String email;
     private String pwd;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Employee> employeeList;
 }
